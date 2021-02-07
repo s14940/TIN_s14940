@@ -22,4 +22,4 @@ Załącznik tin_zaoczny_16c_s14940_definicja.pdf
 3.5 skrypt generujący bazę, tabele oraz dane załączony w TIN_s14940/dokumentacja/SQL.txt
 3.6 uruchomienie node - npm start 
 3.7 adres strony http://localhost:3000
-
+3.8 login - admin hasło - haslo

@@ -1,5 +1,7 @@
+const { required } = require('joi');
 const GameRepository = require('../repository/mysql2/GameRepository');
 const TournamentRepository = require('../repository/mysql2/TournamentRepository');
+
 
 exports.showGameList = (req, res, next) => {
     GameRepository.getGames()
