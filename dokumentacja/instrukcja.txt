@@ -1,6 +1,6 @@
 Instrukcja
 1 aplikacja wykorzystuje Node JS - wymagana instalacja 
-2 apliakcja wykorzystuje Docker - wymagana instalacja 
+2 apliakcja wykorzystuje Docker - wymagana instalacja
 3 uruchomienie docker - docker-compose up w lokalizacji /docker 
 4 dostep do phpMyAdmin http://localhost:8183 
 5 skrypt generujący bazę, tabele oraz dane załączony w TIN_s14940/dokumentacja/SQL.sql 
