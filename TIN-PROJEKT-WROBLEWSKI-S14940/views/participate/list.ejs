@@ -1,0 +1,38 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Zarejestrowane drużyny</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Drużyna</th>
+                <th>Turniej</th>
+                <th>Akcja</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let participate of participates) { %>
+            <tr>
+                <td><%= participate.date.toISOString().split('T')[0] %></td>
+                <td><%= participate.id_team %></td>
+                <td><%= participate.id_tournament %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="/participate/details/<%=participate._id%>" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="/participate/edit/<%=participate._id%>" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="/participate/delete/<%=participate._id%>" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <p><a href="participates/add" class="button-add">Nowa rejestracja</a></p>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

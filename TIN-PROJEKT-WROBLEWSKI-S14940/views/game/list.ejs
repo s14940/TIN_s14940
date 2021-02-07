@@ -1,0 +1,38 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Gry</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Data</th>
+                <th>Ilość tur</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let game of games) { %>
+            <tr>
+                <td><%= game.name %></td>
+                <td><%= game.date.toISOString().split('T')[0] %></td>
+                <td><%= game.turs %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="/games/details/<%=game._id%>" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="/games/edit/<%=game._id%>" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="/games/delete/<%=game._id%>" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <p><a href="games/add" class="button-add">Dodaj nową grę</a></p>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

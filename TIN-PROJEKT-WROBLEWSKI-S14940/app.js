@@ -4,8 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const session = require('express-session');
+app.use(session({
+    secret: 'my_secret_password',
+    resave: false
+}));
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const playerRouter = require('./routes/playerRoute');
+const gameRouter = require('./routes/gameRoute');
+const teamRouter = require('./routes/teamRoute');
+const participateRouter = require('./routes/participateRoute');
+const tournamentRouter = require('./routes/tournamentRoute');
+const playerApiRouter = require('./routes/api/PlayerApiRoute');
+const gameApiRouter = require('./routes/api/GameApiRoute');
+const teamApiRouter = require('./routes/api/TeamApiRoute');
+const tournamentApiRouter = require('./routes/api/TournamentApiRoute');
 
 var app = express();
 
@@ -20,7 +34,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/players', playerRouter);
+app.use('/games', gameRouter);
+app.use('/teams', teamRouter);
+app.use('/participates', participateRouter);
+app.use('/tournaments', tournamentRouter);
+app.use('/api/players', playerApiRouter);
+app.use('/api/games', gameApiRouter);
+app.use('/api/teams', teamApiRouter);
+app.use('/api/tournament', tournamentApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

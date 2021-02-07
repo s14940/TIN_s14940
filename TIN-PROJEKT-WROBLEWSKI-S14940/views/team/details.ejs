@@ -1,0 +1,39 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Szczegóły drużyny</h2>
+        <form class="form">
+            <label for="nazwa">Nazwa</label>
+            <input type="text" name="nazwa" id="nazwa" value="W2A" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="game">Gra</label>
+            <input type="text" name="game" id="game" value="Q3" disabled />
+            <span id="errorGame" class="errors-text"></span>
+
+
+        <div class="form-buttons">
+            <a href="" class="list-actions-button-edit">Edytuj</a>
+            <a href="" class="list-actions-button-details">Powrót</a>
+        </div>
+        </form>
+        <h2>Kierowcy drużyny</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Rok urodzenia</th>
+                <th>Gra</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Jan</td>
+                <td>Kowalski</td>
+                <td>2000</td>
+                <td>Q3</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

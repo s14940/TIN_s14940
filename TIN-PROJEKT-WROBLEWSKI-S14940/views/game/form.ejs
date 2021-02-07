@@ -1,0 +1,83 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationGameeForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= game._id %>">
+
+            <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= game.name ? game.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
+
+            <label for="date">Data<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="date" id="date" value="<%= game.date ? game.date.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorDate" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('date'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('date')).message %>
+                <% } %>
+            </span>
+
+            <label for="turs">Ilość tur<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="turs" id="" pltursaceholder="ilość" value="<%= game.laps %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorTurs" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('turs'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('turs')).message %>
+                <% } %>
+            </span>
+
+            <label for="tournament">Turniej<abbr title="required" aria-label="required">*</abbr></label>
+            <select id="tournament" name="tournamentId" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+                <option value="" selected>--- Wybierz turniej ---</option>
+                <% for (let i = 0; i < allTournaments.length; i++) { let tournament = allTournaments[i]; %>
+                <option value="<%= tournament._id %>" label="<%= tournament.location %>"
+                        <%= (game._id && tournament._id.toString() == game.tournament._id.toString()) ? 'selected' : ''%>></option>
+                <% } %>
+            </select>
+            <span id="errorTournament" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('tournament'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('tournament')).message %>
+                <% } %>
+            </span>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/games">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/games">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/games/edit/<%= game._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Turniej
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Lokalizacja</th>
+                    <th>Nagroda</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="/tournament/details/<%= game.tournament._id %>"><%= game.tournament.location %></a></td>
+                    <td><%= game.tournament.price %> EUR</td>
+                </tr>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

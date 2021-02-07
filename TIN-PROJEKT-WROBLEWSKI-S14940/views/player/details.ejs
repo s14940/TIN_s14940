@@ -1,0 +1,44 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Szczegóły gracza</h2>
+        <form class="form">
+            <label for="imie">Imię</label>
+            <input type="text" name="imie" id="imie" value="Jan" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="nazwisko">Nazwisko</label>
+            <input type="text" name="nazwisko" id="nazwisko" value="Kowalski" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="data">Data urodzenia</label>
+            <input type="date" name="data" id="data" value="2000" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="game">Gra</label>
+            <input type="text" name="game" id="game" value="Q3" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <div class="form-buttons">
+                <a href="" class="list-actions-button-edit">Edytuj</a>
+                <a href="" class="list-actions-button-details">Powrót</a>
+            </div>
+        </form>
+        <h2>Drużyna gracza</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Gra</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>W2A</td>
+                <td>Q3</td>
+                
+            </tr>
+            </tbody>
+        </table>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

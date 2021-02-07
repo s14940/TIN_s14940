@@ -1,0 +1,36 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Szczegóły turnieju</h2>
+        <form class="form">
+            <label for="lokalizacja">Lokalizacja</label>
+            <input type="text" name="lokalizacja" id="lokalizacja" value="London" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="nagroda">Nagroda</label>
+            <input type="number" name="nagroda" id="nagroda" value="1000" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <div class="form-buttons">
+                <a href="" class="list-actions-button-edit">Edytuj</a>
+                <a href="" class="list-actions-button-details">Powrót</a>
+            </div>
+        </form>
+        <h2>Gry w turnieju</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Data</th>
+                <th>Ilość tur</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Q3</td>
+                <td>01.07</td>
+                <td>03</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

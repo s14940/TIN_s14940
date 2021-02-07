@@ -1,0 +1,40 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Zawodnicy</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Data urodzenia</th>
+                <th>Gra</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let player of players) { %>
+            <tr>
+                <td><%= player.firstName %></td>
+                <td><%= player.lastName %></td>
+                <td><%= player.dateOfBirth.toISOString().split('T')[0] %></td>
+                <td><%= player.game %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="/players/details/<%=player._id%>" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="/players/edit/<%=player._id%>" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="/players/delete/<%=player._id%>" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <p><a href="players/add" class="button-add">Dodaj nowego zawodnika</a></p>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

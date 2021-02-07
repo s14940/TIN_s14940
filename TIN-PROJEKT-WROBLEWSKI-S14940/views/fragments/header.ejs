@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ON GAME</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="application/javascript" src="/js/validationCommon.js"></script>
+</head>
+<body>
+<header>
+    <h1>ON GAME</h1>
+    <img src="../images/logo.jpg" alt="ON GAME">
+    
+</header>
+<nav>
+    <ul>
+        <li><a href="/" class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
+        <li><a href="/tournaments" class="<%= navLocation == 'tournament' ? 'active' : ''%>">Turniej</a></li>
+        <li><a href="/games" class="<%= navLocation == 'game' ? 'active' : ''%>">Gra</a></li>
+        <li><a href="/teams"class="<%= navLocation == 'team' ? 'active' : ''%>">Drużyna</a></li>
+        <li><a href="/players"class="<%= navLocation == 'player' ? 'active' : ''%>">Zawodnik</a></li>
+        <li><a href="/Participates"class="<%= navLocation == 'participate' ? 'active' : ''%>">Rejestruj</a></li>
+        
+        
+        
+    </ul>
+</nav>
+
+

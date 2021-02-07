@@ -1,0 +1,102 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationPlayerForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= player._id %>">
+
+            <label for="firstName">Imię<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="firstName" id="firstName" placeholder="2-60 znaków" value="<%= player.firstName %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorFirstName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('firstName'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('firstName')).message %>
+                <% } %>
+            </span>
+            <label for="lastName">Nazwisko<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="lastName" id="lastName" placeholder="2-60 znaków" value="<%= player.lastName %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorLastName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('lastName'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('lastName')).message %>
+                <% } %>
+            </span>
+            <label for="dateOfBirth">Data urodzenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" value="<%= player.dateOfBirth ? player.dateOfBirth.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorDateOfBirth" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('dateOfBirth'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('dateOfBirth')).message %>
+                <% } %>
+            </span>
+
+            <label for="game">Gra<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="game" id="game" placeholder="2-60 znaków" value="<%= player.game %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorGame" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('game'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('game')).message %>
+                <% } %>
+            </span>
+
+            <label for="team">Drużyna<abbr title="required" aria-label="required">*</abbr></label>
+            <select id="team" name="teamId" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+                <option value="" selected>--- Wybierz drużynę ---</option>
+                <% for (let i = 0; i < allTeams.length; i++) { let team = allTeams[i]; %>
+                <option value="<%= team._id %>" label="<%= team.name %>"
+                        <%= (player._id && team._id.toString() == player.team._id.toString()) ? 'selected' : ''%>></option>
+                <% } %>
+            </select>
+            <span id="errorTeam" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('team'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('team')).message %>
+                <% } %>
+            </span>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/players">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/players">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/players/edit/<%= player._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Drużyna gracza
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Gra</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="/teams/details/<%= player.team._id %>"><%= player.team.name %></a></td>
+                    <td><%= player.team.game %></td>
+                    
+                </tr>
+                </tbody>
+            </table>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <% if (formMode != 'showDetails') { %>
+            <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+            <a class="form-button-cancel" href="/players">Anuluj</a>
+            <% } else { %>
+                <a class="form-button-cancel" href="/players">Powrót</a>
+            <% } %>
+        </div>
+
+    </main>
+<%- include('./../fragments/footer.ejs') %>

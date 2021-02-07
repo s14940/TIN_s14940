@@ -1,0 +1,66 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationTeamForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= team._id %>">
+
+            <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= team.name ? team.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
+
+            <label for="game">Gra<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="game" id="game" placeholder="2-60 znaków" value="<%= team.game ? team.game : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorGame" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('game'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('game')).message %>
+                <% } %>
+            </span>
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/teams">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/teams">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/teams/edit/<%= team._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Zawodnik
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Data urodzenia</th>
+                    <th>Gra</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let player of team.players) { %>
+                <tr>
+                    <td><a href="/players/details/<%= player._id %>"><%= player.firstName %></a></td>
+                    <td><%= player.lastName %></td>
+                    <td><%= player.dateOfBirth.toISOString().split('T')[0] %></td>
+                    <td><%= player.game %></td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+<%- include('./../fragments/footer.ejs') %>
