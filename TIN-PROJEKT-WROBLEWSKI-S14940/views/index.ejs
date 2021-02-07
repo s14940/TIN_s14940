@@ -1,7 +1,22 @@
-  
 <%- include('./fragments/header.ejs') %>
-<main>
-    <h2>Strona główna</h2>
-    <h1>Strona poświęcona rejestracji turniejów, gier, drużyn i zawodników w grach online.</h1>
-</main>
+    <main>
+        <h2>Strona główna</h2>
+        <h1>Strona poświęcona rejestracji turniejów, gier, drużyn i zawodników w grach online.</h1>
+        <% if(!loggedUser) { %>
+            <div id="login">
+                <h5>Logowanie</h5>
+                <form method="post" action="/login" novalidate>
+                    <p><label for="login">Login:</label> <br />
+                    <input type="text" id="login" name="login"></p>
+                    <p><label for="loginPassword">Hasło:</label><br />
+                    <input type="password" id="loginPassword" name="password"></p>
+                    <p><input type="submit" value="Zaloguj się"><br />
+                    <span id="loginErrors"><%= loginError ? loginError : ''%></span></p>
+                </form>
+            </div>
+        <% } else { %>
+        <p><span>Jesteś zalogowany jako: <%=loggedUser.login%></span><br />
+        <a href="/logout">Wyloguj się</a></p>
+        <% } %>
+    </main>
 <%- include('./fragments/footer.ejs') %>

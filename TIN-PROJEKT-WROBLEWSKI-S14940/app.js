@@ -4,11 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const session = require('express-session');
-app.use(session({
-    secret: 'my_secret_password',
-    resave: false
-}));
+
 
 var indexRouter = require('./routes/index');
 const playerRouter = require('./routes/playerRoute');
@@ -20,6 +16,7 @@ const playerApiRouter = require('./routes/api/PlayerApiRoute');
 const gameApiRouter = require('./routes/api/GameApiRoute');
 const teamApiRouter = require('./routes/api/TeamApiRoute');
 const tournamentApiRouter = require('./routes/api/TournamentApiRoute');
+const session = require('express-session');
 
 var app = express();
 
@@ -32,6 +29,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'my_secret_password',
+  resave: false
+}));
+app.use((req, res, next) => {
+  const loggedUser = req.session.loggedUser;
+  res.locals.loggedUser = loggedUser;
+  if(!res.locals.loginError) {
+    res.locals.loginError = undefined;
+  }
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/players', playerRouter);

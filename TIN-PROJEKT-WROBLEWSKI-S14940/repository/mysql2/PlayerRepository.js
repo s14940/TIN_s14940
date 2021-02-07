@@ -1,5 +1,5 @@
 const db = require("../../config/mysql2/db");
-const playerSchema = require("../../model/joi/player");
+const playerSchema = require("../../model/joi/Player");
 
 exports.getPlayers = () => {
     return db.promise().query("SELECT * FROM Player")
